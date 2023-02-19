@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Todo from "./components/Todo";
 import { supabase } from "./lib/helper/supabaseClient";
 
 export default function App() {
@@ -30,17 +31,11 @@ export default function App() {
 			provider: "github",
 		});
 	};
-	const logout = async () => {
-		await supabase.auth.signOut();
-	};
 
 	return (
 		<div>
 			{user ? (
-				<div>
-					<h1>Authenticated</h1>
-					<button onClick={logout}>Logout</button>
-				</div>
+				<Todo user={user} />
 			) : (
 				<button onClick={login}>Login with Github</button>
 			)}
